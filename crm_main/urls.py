@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 
-from apps.common.views import HomeView, SignUpView, DashboardView, ProfileUpdateView, ProfileView
+from apps.common.views import HomeView, SignUpView, DashboardView, ProfileUpdateView, ProfileView, SessionDeleteView, SimulatorView
 
 from django.contrib.auth import views as auth_views
 
@@ -65,6 +65,8 @@ urlpatterns = [
          name='password_reset_complete'),
 
     path('oauth/', include('social_django.urls', namespace='social')),  # <-- here
+    path('session/delete/<int:pk>', SessionDeleteView.as_view(), name='session-delete'),
+    path('simulator', SimulatorView.as_view(), name='simulator'),
 ]
 
 
