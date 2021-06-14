@@ -1,0 +1,253 @@
+#sideCol {
+    padding: 0;
+    max-height: 100%;
+    max-width: 100%;
+    margin-bottom: 30px;
+}
+
+.sideColPairDiv {
+    text-align: center;
+    /* margin-bottom: .125em; */
+    padding: 10px 0;
+    background-color: #175d90;
+    color: #fff !important;
+}
+
+#backTestBoard {
+    height: 100%;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.lowPadding {
+    padding-left: .3em;
+    padding-right: .3em;
+}
+
+.autoRunSett {
+    color: #6392bc;
+    text-align: center;
+}
+
+#barMoveFrame {
+    color: #000;
+    float: left;
+    /* margin-bottom: .625em; */
+    padding-bottom: .3125em;
+    padding-top: .3125em;
+}
+
+#backTestBoard .btn-default {
+    color: #6392bc;
+    background-color: #ececec !important;
+}
+
+#timeFly {
+    float: left;
+    margin-left: .6em;
+}
+
+
+/* Time */
+
+#timeDivWrapper {
+    background-color: #419a1c;
+    padding: 10px 0;
+    /* border: 1px solid #a7aeb4; */
+    display: block;
+    color: #ffffff !important;
+}
+
+#timeDate {
+    float: right;
+    margin-right: 1em;
+    margin-left: .4em;
+}
+
+
+/* GBP/USD */
+
+#unitsDiv {
+    border-style: dotted;
+    border-width: 1px .1px .1px 1px;
+    border-color: #000;
+    /* background-color: #0a031f; */
+    text-align: center;
+    z-index: 1;
+}
+
+div#openTrade {
+    padding: 10px 0;
+}
+
+div#orderVars {
+    padding-top: 10px;
+}
+
+.fxsidenav {
+    overflow: auto;
+    max-height: 90vh;
+    color: #fafafa !important;
+    background-color: rgb(11 8 31);
+}
+
+fieldset#condOrderField\ form-fill {
+    padding: 10px 0;
+}
+
+span.fspan.fspn-pd {
+    padding-bottom: 7px;
+}
+
+#buy {
+    background-color: #2e5e21;
+    margin-right: 10px;
+}
+
+#sell {
+    background-color: #b53330;
+}
+
+.tradeButtonsPrice {
+    display: block;
+}
+
+.tradeButton {
+    -moz-box-shadow: inset 0 -.875em 0 -1.5em #e67a73;
+    -webkit-box-shadow: inset 0 -0.875em 0 -1.5em #e67a73;
+    box-shadow: inset 0 -0.875em 0 -1.5em #e67a73;
+    -moz-border-radius: 1.3125em;
+    -webkit-border-radius: 1.0625em;
+    border-radius: 1.0625em;
+    border: .125em solid #fff !important;
+    display: inline-block;
+    cursor: pointer;
+    color: #fff !important;
+    font-family: Arial;
+    margin-top: .5em;
+    font-weight: 700;
+    padding: .7em .7em;
+    text-decoration: none;
+}
+
+.fspan {
+    display: block;
+}
+
+input,
+select {
+    color: #000;
+}
+
+#coSubmitBtn {
+    margin-bottom: 23px;
+    margin-left: 22px;
+    padding: 10px 17px;
+}
+
+
+/* Notes */
+
+#userNotes {
+    width: 100%;
+}
+
+#userNotes>p {
+    background-color: #419a1c;
+    color: #ffffff !important;
+}
+
+
+/* Right Side */
+
+.cont {
+    width: 100%;
+    padding: 2px;
+    /* max-height: 100%; */
+    overflow: auto;
+}
+
+
+/* table */
+
+.possInfo {
+    min-height: 200px;
+    overflow-y: auto;
+    text-align: center;
+    /* background-color: #070a1ca8; */
+}
+
+
+/* Footer */
+
+table#accStat {
+    /* bottom: 0; */
+    margin-bottom: 0;
+    background: #175d90;
+    color: #ffffff;
+}
+
+#col9 {
+    padding: 0;
+}
+
+li.new-order {
+    padding: 0 0 15px 0;
+    color: #175d90;
+    font-weight: 600;
+}
+
+#sideColPairCondOrders>i>span {
+    font-size: 1.1em;
+    color: #4286f4;
+    padding: 16px 3px 7px 3px;
+}
+
+.colapsBtn {
+    float: right;
+    margin-top: -9px;
+    background-color: #ececec !important;
+    cursor: pointer;
+}
+
+tr.statHeader {
+    background: #175d90;
+    color: #ffffff !important;
+}
+
+.font17 {
+    font-size: 16px;
+}
+
+.autoRunSett>input[type=checkbox] {
+    /* -webkit-transform: scale(2); */
+    -webkit-transform: scale(2);
+    padding: 3px;
+    margin: .3em;
+    margin-top: 0;
+}
+
+#speedDiv {
+    float: left;
+    margin-top: 7px;
+    padding: 0;
+}
+
+i.fa.fa-angle-right {
+    color: #175d90;
+    font-weight: 600;
+    padding-left: 5px;
+}
+
+
+/* li.new-order.order {
+    padding-left: 20px;
+} */
+
+span.value {
+    padding-left: 18px;
+}
+
+h4.notes {
+    padding: 10px 0;
+}

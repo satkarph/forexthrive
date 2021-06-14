@@ -75,7 +75,7 @@
                     <tr>
                         <td>{{ i.strategy_name }}</td>
                         <td>{{ i.equity }}</td>
-                        <td><a href="#"><i class="fas fa-play"></i></a></td>
+                        <td><a href="{% url 'simulator' %}"><i class="fas fa-play"></i></a></td>
                         <td><a href="{% url 'session-delete' i.id %}"><i class="icon-color fas fa-trash fa-fw"></i></a></td>
                     </tr>
                 {% endfor %}
