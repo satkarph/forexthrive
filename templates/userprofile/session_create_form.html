@@ -1,143 +1,159 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
 {% block content %}
+<div id="wrapper">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    <!--                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+                </div>
 
+                <!-- Main Content Here -->
+                <div class="row">
+                    <!-- Company Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Companies
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">4,083</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-home fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        </div>
+                    <!-- Contact Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            Contacts
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">18,002</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--    </div>-->
+                <!-- /.container-fluid -->
 
-        <!-- Main Content Here -->
-<!--          <div class="row">-->
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Backtesting Sessions</h1>
+                                    </div>
+                                    <table id="table_id" width="100%" class="table table-hover table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="p-10">Name</th>
+                                            <th class="p-10">Equity</th>
+                                            <th class="p-10">Start</th>
+                                            <th class="p-10">Delete</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for i in object_list %}
+                                        <tr>
+                                            <td class="p-10">{{ i.strategy_name }}</td>
+                                            <td class="p-10">{{ i.equity }}</td>
+                                            <td class="p-10"><a href="{% url 'simulator' %}"><i class="fas fa-play"></i></a>
+                                            </td>
+                                            <td class="p-10"><a href="{% url 'session-delete' i.id %}"><i
+                                                    class="icon-color fas fa-trash fa-fw"></i></a></td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
-<!--            &lt;!&ndash; Company Card Example &ndash;&gt;-->
-<!--            <div class="col-xl-3 col-md-6 mb-4">-->
-<!--              <div class="card border-left-primary shadow h-100 py-2">-->
-<!--                <div class="card-body">-->
-<!--                  <div class="row no-gutters align-items-center">-->
-<!--                    <div class="col mr-2">-->
-<!--                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Companies</div>-->
-<!--                      <div class="h5 mb-0 font-weight-bold text-gray-800">4,083</div>-->
-<!--                    </div>-->
-<!--                    <div class="col-auto">-->
-<!--                      <i class="fas fa-home fa-2x text-gray-300"></i>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Create Session</h1>
+                                    </div>
 
-<!--            &lt;!&ndash; Contact Card Example &ndash;&gt;-->
-<!--            <div class="col-xl-3 col-md-6 mb-4">-->
-<!--              <div class="card border-left-warning shadow h-100 py-2">-->
-<!--                <div class="card-body">-->
-<!--                  <div class="row no-gutters align-items-center">-->
-<!--                    <div class="col mr-2">-->
-<!--                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Contacts</div>-->
-<!--                      <div class="h5 mb-0 font-weight-bold text-gray-800">18,002</div>-->
-<!--                    </div>-->
-<!--                    <div class="col-auto">-->
-<!--                      <i class="fas fa-comments fa-2x text-gray-300"></i>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-
-
-
-<!--    </div>-->
-    <!-- /.container-fluid -->
-
-<div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body p-0">
-        <!-- Nested Row within Card Body -->
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="p-5">
-              <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Backtesting Sessions</h1>
-              </div>
-              <table id="table_id" width="100%" class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Equity</th>
-                        <th>Start</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for i in object_list %}
-                    <tr>
-                        <td>{{ i.strategy_name }}</td>
-                        <td>{{ i.equity }}</td>
-                        <td><a href="{% url 'simulator' %}"><i class="fas fa-play"></i></a></td>
-                        <td><a href="{% url 'session-delete' i.id %}"><i class="icon-color fas fa-trash fa-fw"></i></a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                                    <form method="post" id="post-form">
+                                        {% csrf_token %}
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                {{form.strategy_name | as_crispy_field}}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                {{form.equity | as_crispy_field}}
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                {{form.leverage | as_crispy_field}}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                {{form.account_type | as_crispy_field}}
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                {{form.select_pairs | as_crispy_field}}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                {{form.simulation_start_date | as_crispy_field}}
+                                            </div>
+                                        </div>
+                                        <h5 style="text-align:center;"><b>Last-Bar: Sep 30 2020</b></h5>
+                                        <hr/>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-2">
+                                                <b>Notifications:</b>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <div class="form-check">
+                                                    {{form.most_recent_data | as_crispy_field}}
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="form-check">
+                                                    {{form.tick_volume | as_crispy_field}}
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="form-check">
+                                                    {{form.min_timeframe | as_crispy_field}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary">Create</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-            <div class="col-lg-6">
-            <div class="p-5">
-              <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create Session</h1>
-              </div>
-              <form method="post" id="post-form">
-                {% csrf_token %}
-<!--                {{form | crispy }}-->
-                  <div class="form-row">
-                      <div class="col-lg-6">
-                        Strategy {{form.strategy_name }}
-                      </div>
-                      <div class="col-lg-6">
-                        Equity {{form.equity }}
-                      </div>
-                  </div>
-                  <br/>
-                  <br/>
-                   <div class="form-row">
-                      <div class="col-lg-6">
-                        Leverage {{form.leverage }}
-                      </div>
-                      <div class="col-lg-6">
-                        Account Type {{form.account_type }}
-                      </div>
-                  </div>
-                  <br/>
-                  <br/>
-                   <div class="form-row">
-                      <div class="col-lg-6">
-                        Select Pairs {{form.select_pairs }}
-                      </div>
-                      <div class="col-lg-6">
-                        Simulation Start Date {{form.simulation_start_date }}
-                      </div>
-                  </div>
-                  <br/>
-                  <br/>
-                  <h5 style="text-align:center;"><b>Last-Bar: Sep 30 2020</b></h5>
-                  <hr/>
-                  <div class="form-row">
-                      <div class="col-lg-3"><b>Notifications:</b></div>
-                      <div class="col-lg-3">{{form.most_recent_data }} Most recent data </div>
-                      <div class="col-lg-3">{{form.tick_volume }} Tick Volume</div>
-                      <div class="col-lg-3">{{form.min_timeframe }} Min time frame</div>
-                  </div>
-                  <br/>
-                <button  class="btn btn-primary">Create</button>
-              </form>
-            </div>
-          </div>
-
-
         </div>
-      </div>
     </div>
+</div>
 {% endblock content %}

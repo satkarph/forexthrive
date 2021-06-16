@@ -12,6 +12,7 @@ from apps.userprofile.models import Session
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.list import ListView
 
+
 class HomeView(TemplateView):
     template_name = 'common/home.html'
 
@@ -27,35 +28,37 @@ class HomeView(TemplateView):
 #         context['book_list'] = self.request.user
 #         return context
 
-class DashboardView(SuccessMessageMixin, CreateView, ListView):
+
+class DashboardView(CreateView, ListView):
     model = Session
     form_class = SessionForm
     template_name_suffix = '_create_form'
     success_url = "/dashboard/"
-    success_message = "Session was added successfully"
+    # success_message = "Session was added successfully"
 
     def form_valid(self, form):
-        print(self.request.user)
         obj = form.save(commit=False)
         obj.user = User.objects.get(username=self.request.user)
         return super().form_valid(form)
+
+    def get_queryset(self):
+        return super().get_queryset().filter(user__username=self.request.user)
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
     #     return context
 
 
-class SessionDeleteView(SuccessMessageMixin, DeleteView):
+class SessionDeleteView(DeleteView):
     model = Session
     success_url = "/dashboard/"
-    success_message = "Session was deleted successfully"
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
 
 class SimulatorView(TemplateView):
-    template_name = 'common/forexthrive.html'
+    template_name = 'common/simulator.html'
 
 
 class SignUpView(CreateView):

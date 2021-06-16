@@ -1,0 +1,361 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+                    <h1 class="h3 mb-0 text-gray-800">Simulator</h1>
+                    <!--                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+                </div>
+                <div class="row content">
+                    <div class="col-md-3 col-sm-12 sidenav sideMenu" id="sideCol">
+                        <div class="container cont">
+                            <ul class="nav nav-tabs">
+                                <li class="new-order order">New Order</li>
+                            </ul>
+
+                            <div class="tab-content fxsidenav">
+                                <div class="sideColPairDiv">
+                                    <span><b>Controller</b></span>
+                                </div>
+
+                                <div id="backTestBoard" class="row">
+                                    <div class="col-md-12 lowPadding">
+                                        <div class="col-md-4 lowPadding">
+                                            <select id="barMoveFrame" class="center-block">
+                                                <option value="5">M5</option>
+                                                <option value="15">M15</option>
+                                                <option value="30">M30</option>
+                                                <option value="60">H1</option>
+                                                <option value="240">H4</option>
+                                                <option value="1440" selected="selected">D1</option>
+                                            </select>
+                                            <button class="btn btn-default btn-sm" id="timeFly" title="Step-thru">
+                                                <img src="{% static 'img/candleBar.png' %}"
+                                                     alt="step thru time button img">
+                                                <!-- <i class="glyphicon glyphicon-chevron-right" id="barMoveGlypico"></i> -->
+                                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 lowPadding col-play">
+                                            <div class="col-md-6 lowPadding">
+                                                <a title="Play/Pause" class="btn btn-default btn-sm" id="button_play">
+                                                    <!-- <span class="glyphicon glyphicon-pause" id="button_play_span"></span> -->
+                                                    <i class="fa fa-play" aria-hidden="true"></i>
+
+                                                </a>
+                                            </div>
+                                            <div class="col-md-6 lowPadding" id="speedDiv">
+                                                <input autocomplete="off" data-toggle="tooltip" title="Market speed"
+                                                       type="range" step="1" id="speed" min="2" max="100" value="50"
+                                                       oninput="engine.speedUpdate(value)">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 lowPadding autoRunSett" title="Step-thru AutoRun Mode">
+                                            <input type="checkbox" id="autoRunCheck" autocomplete="off">
+                                            <!-- <i class="fa fa-space-shuttle font17" aria-hidden="true"></i> -->
+                                            <i class="fa fa-space-shuttle" aria-hidden="true"></i>
+                                            <span id="autoRunJumpInterval" class="font17" title="Step size">D1</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center" id="timeDivWrapper">
+                                    <i class="fa fa-calendar" title="Current Date/Time" aria-hidden="true"
+                                       id="calendarIcon">
+                                        <b id="timeDate">Tue May 08 2012 05:59:00 </b>
+                                    </i>
+                                    <i class="fa fa-clock-o hidden" title="Current Time-Zone" aria-hidden="true"
+                                       id="clockIcon">
+                                        <span id="timeHours"></span>
+                                    </i>
+                                </div>
+
+
+                                <div id="newOrder">
+                                    <div id="unitsDiv">
+                                        <div class="sideColPairDiv side-coltxt">
+                                            <b id="sideColPair">GBP/USD</b>
+                                        </div>
+                                        <div class="openTradeFixed" id="openTrade">
+
+                                            <button title="Buy market" class="tradeButton" id="buy">
+                                                <span id="priceBuySpan" class="tradeButtonsPrice">1.61820</span>
+                                                <span id="buySpan"
+                                                      class="tradeBtnsText marketButtons hidden-xs">BUY</span>
+                                            </button>
+                                            <button title="Sell market" class="tradeButton" id="sell">
+                                                <span id="priceSellSpan" class="tradeButtonsPrice">1.61790</span>
+                                                <span id="sellSpan"
+                                                      class="tradeBtnsText marketButtons hidden-xs">SELL</span>
+                                            </button>
+                                            <div id="orderVars">
+                                                <form id="unitsForm" class="fspan">
+                                                    <label class="units">Units:</label>
+                                                    <input type="number" pattern="\d*" name="quantity" id="posUnits"
+                                                           min="0" max="1000000" step="1000" value="1000">
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div id="sideColPairCondOrders" class="sideColPairDiv">
+                                            <span><b>Conditional Order</b></span>
+                                            <i class="colapsBtn" title="Collapse" id="btnCondCollaps"
+                                               data-toggle="collapse" data-target="#conditionalOrders"
+                                               aria-expanded="true"><span class="fa fa-caret-down"
+                                                                          aria-hidden="true"></span></i>
+                                        </div>
+                                        <div id="conditionalOrders" class="collapse in" aria-expanded="true">
+                                            <form>
+                                                <fieldset id="condOrderField form-fill">
+                                                        <span class="fspan fspn-pd" title="Buy or Sell order"><label
+                                                                id="iSide">Side:</label>&nbsp;
+                                  <input type="radio" id="sideBuy" name="cond" value="buy" checked="">Buy
+                                  <input type="radio" id="sideSell" name="cond" value="sell">Sell
+                                </span>
+                                                    <span class="fspan fspn-pd" title="Stop or Limit order">
+                                  <label id="iType">Type:</label>&nbsp;&nbsp;&nbsp;
+                                  <select id="coType">
+                                    <option value="stopOrder" id="stopOrder" selected="">Stop order</option>
+                                    <option value="limitOrder" id="limitOrder">Limit order</option>
+                                  </select>
+                                </span>
+                                                    <span class="fspan fspn-pd" title="Trade Open Price">
+                                  <label>Entry Price:</label>
+                                  <input type="number" pattern="\d*" id="coEntryPrice" name="quantity" min="0"
+                                         max="1000000" step="0.0001" value="">
+                                </span>
+                                                    <span class="fspan fspn-pd" title="Set Take Profit Target Price">
+                                  <label>Take Profit:</label>
+                                  <input type="number" pattern="\d*" id="coTakeProfit" name="quantity" min="0"
+                                         max="1000000" step="0.0001" value="">
+                                </span>
+                                                    <span class="fspan fspn-pd" title="Set Stop Loss Target Price">
+                                  <label id="iStopLoss">Stop Loss:</label>&nbsp; &nbsp;
+                                  <input type="number" pattern="\d*" id="coStopLoss" name="quantity" min="0"
+                                         max="1000000" step="0.0001" value="">
+                                </span>
+                                                </fieldset>
+                                            </form>
+                                            <button class="btn btn-primary" id="coSubmitBtn" type="submit">Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Notes -->
+                                <div id="userNotes" class="hidden-xs text-center">
+                                    <h3 class="notes" style="font-size: 22px;">Notes:</h3>
+                                    <p contenteditable="true" class="list-group-item">My Strategy:</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side -->
+                    <div class="col-md-9 col-xs-12" id="col9">
+                        <div class="container cont">
+                            <ul class="nav nav-tabs" id="instTabs">
+                                <li class="new-order">GBP/USD</li>
+                            </ul>
+                            <!-- Chart -->
+                            <div class="tab-content" id="charTabs">
+                                <div id="home" class="tab-pane fade in active">
+                                </div>
+                            </div>
+                            <img src="{% static 'img/graph.png' %}" alt="step thru time button img"
+                                 style="width: 900px;">
+
+                            <!-- chart end -->
+
+                            <div class="nv">
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+                                           href="#possInfo" role="tab" aria-controls="possInfo" aria-selected="true">Trades</a>
+                                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+                                           href="#possSummary" role="tab" aria-controls="possSummary"
+                                           aria-selected="false">Summary</a>
+                                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+                                           href="#orders" role="tab" aria-controls="orders"
+                                           aria-selected="false">Orders</a>
+                                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+                                           href="#closedPos" role="tab" aria-controls="closedPos" aria-selected="false">Closed</a>
+                                    </div>
+                                </nav>
+
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="possInfo" role="tabpanel"
+                                         aria-labelledby="possInfo-tab" style="height: 104px;">
+                                        <table class="table table-bordered" id="posValues">
+                                            <thead>
+                                            <tr class="statHeader">
+                                                <th>ID</th>
+                                                <th>Instrumen</th>
+                                                <th>Side</th>
+                                                <th>Amount</th>
+                                                <th>Price</th>
+                                                <th>Current</th>
+                                                <th>TP</th>
+                                                <th>SL</th>
+                                                <th>P\L pips</th>
+                                                <th>P\L USD</th>
+                                                <th>Close</th>
+                                            </tr>
+                                            <tr class="posRow0">
+                                                <td>0</td>
+                                                <td>GBP/USD</td>
+                                                <td>long</td>
+                                                <td>1000</td>
+                                                <td>1.62310</td>
+                                                <td>1.62190</td>
+                                                <td>
+                                                    <button type="button" class="btn-default btn-xs" id="tp0"
+                                                            onclick="engine.posObj(this.id)" data-toggle="modal"
+                                                            data-target="#tpslModal">0
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn-default btn-xs" id="sl0"
+                                                            onclick="engine.posObj(this.id)" data-toggle="modal"
+                                                            data-target="#tpslModal">0
+                                                    </button>
+                                                </td>
+                                                <td>-12</td>
+                                                <td style="color: rgb(255, 2, 2);">-1.20</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-xs" id="close0"
+                                                            onclick="engine.posObj(this.id,this)">x
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="possSummary" role="tabpanel"
+                                         aria-labelledby="possSummary-tab" style="height: 104px;">
+                                        <table class="table table-bordered" id="pSummaryTable">
+                                            <thead>
+                                            <tr class="statHeader">
+                                                <th>Instrumen</th>
+                                                <th>Long/Short</th>
+                                                <th>Amount</th>
+                                                <th>Price</th>
+                                                <th>P/L</th>
+                                                <th>Close</th>
+                                            </tr>
+                                            <tr class="pstGBP/USD">
+                                                <td>GBP/USD</td>
+                                                <td>1000/0(1/0)</td>
+                                                <td>GBP 1000</td>
+                                                <td>1.62310</td>
+                                                <td style="color: rgb(255, 2, 2);">USD -1.20</td>
+                                                <td>
+                                                    <button class="btn btn-danger btn-xs" id="closeAllGBP/USD"
+                                                            onclick="engine.closeAllPos(this.id)">x
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab"
+                                         style="height: 104px;">
+                                        <table class="table table-bordered" id="orderValues">
+                                            <thead>
+                                            <tr class="statHeader">
+                                                <th>ID</th>
+                                                <th>Instrumen</th>
+                                                <th>Side</th>
+                                                <th>Amount</th>
+                                                <th>Price</th>
+                                                <th>Type</th>
+                                                <th>Status</th>
+                                                <th>TP</th>
+                                                <th>SL</th>
+                                                <th>Cancel</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="closedPos" role="tabpanel"
+                                         aria-labelledby="closedPostab" style="height: 104px;">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="closedPositions">
+                                                <thead>
+                                                <tr class="statHeader">
+                                                    <th>ID</th>
+                                                    <th>Instrumen</th>
+                                                    <th>Side</th>
+                                                    <th>Amount</th>
+                                                    <th>Open Price</th>
+                                                    <th>Open time</th>
+                                                    <th>Close Price</th>
+                                                    <th>Close time</th>
+                                                    <th>P\L pips</th>
+                                                    <th>P\L USD</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>GBP/USD</td>
+                                                    <td>long</td>
+                                                    <td>1000</td>
+                                                    <td>1.62600</td>
+                                                    <td>2012-09-17 14:52</td>
+                                                    <td>1.62400</td>
+                                                    <td>2012-09-17 18:09</td>
+                                                    <td>-20</td>
+                                                    <td style="color: rgb(255, 2, 2);">-2.00</td>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Table-end -->
+                        </div>
+                    </div>
+                    <!-- Right Side Close -->
+
+
+                    <!-- Footer -->
+                    <div class="table-responsive" id="marginStatsDiv">
+                        <table id="accStat" class="table table-bordered tradingStat">
+                            <thead>
+                            <tr>
+                                <th><b class="hidden-xs">Equity:</b> $ <span>999.80</span></th>
+                                <th><b class="hidden-xs">Free Margin:</b> $ <span style="color: rgb(255, 255, 255);">945.67</span>
+                                </th>
+                                <th><b class="hidden-xs">Used Margin:</b> $ <span>54.13</span></th>
+                                <th><b class="hidden-xs">Profit/Loss:</b> $ <span
+                                        style="color: rgb(41, 178, 3);">0.90</span></th>
+                                <th><b class="hidden-xs">Use of Leverage:</b> % <span>5.41</span> <i
+                                        class="fa fa-info-circle hidden" aria-hidden="true"></i></th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+    </div>
+    <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+{% endblock content %}
+
